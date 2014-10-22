@@ -12,7 +12,7 @@ Why did I start this project? Well, I believe there are no good full view calend
 
 ### Features
 
-- **Reusable** - there is no UI in this calendar. All buttons to switch view or load events are done separately. You will end up with your own uniquie calendar design.
+- **Reusable** - there is no UI in this calendar. All buttons to switch view or load events are done separately. You will end up with your own unique calendar design.
 - **Template based** - all view like **year**, **month**, **week** or **day** are based on templates. You can easily change how it looks or style it or even add new custom view.
 - **LESS** - easy adjust and style your calendar with less variables file.
 - **AJAX** - It uses AJAX to feed calendar with events. You provide URL and just return by this URL `JSON` list of events.
