@@ -3,11 +3,11 @@
 	"use strict";
 
 	var options = {
-		events_source: 'events.json.php',
+		events_source: 'events.json',
 		view: 'month',
 		tmpl_path: 'tmpls/',
 		tmpl_cache: false,
-		day: '2013-03-12',
+		day: '2015-05-21',
 		onAfterEventsLoad: function(events) {
 			if(!events) {
 				return;

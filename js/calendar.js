@@ -8,138 +8,138 @@
 "use strict";
 
 Date.prototype.getWeek = function() {
-	var onejan = new Date(this.getFullYear(), 0, 1);
-	return Math.ceil((((this.getTime() - onejan.getTime()) / 86400000) + onejan.getDay() + 1) / 7);
+  var onejan = new Date(this.getFullYear(), 0, 1);
+  return Math.ceil((((this.getTime() - onejan.getTime()) / 86400000) + onejan.getDay() + 1) / 7);
 };
 Date.prototype.getMonthFormatted = function() {
-	var month = this.getMonth() + 1;
-	return month < 10 ? '0' + month : month;
+  var month = this.getMonth() + 1;
+  return month < 10 ? '0' + month : month;
 };
 Date.prototype.getDateFormatted = function() {
-	var date = this.getDate();
-	return date < 10 ? '0' + date : date;
+  var date = this.getDate();
+  return date < 10 ? '0' + date : date;
 };
 if(!String.prototype.format) {
-	String.prototype.format = function() {
-		var args = arguments;
-		return this.replace(/{(\d+)}/g, function(match, number) {
-			return typeof args[number] != 'undefined' ? args[number] : match;
-		});
-	};
+  String.prototype.format = function() {
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function(match, number) {
+	 return typeof args[number] != 'undefined' ? args[number] : match;
+       });
+  };
 }
 if(!String.prototype.formatNum) {
-	String.prototype.formatNum = function(decimal) {
-		var r = "" + this;
-		while(r.length < decimal)
-			r = "0" + r;
-		return r;
-	};
+  String.prototype.formatNum = function(decimal) {
+		                var r = "" + this;
+		                while(r.length < decimal)
+			          r = "0" + r;
+		                    return r;
+	                      };
 }
 
 (function($) {
 
-	var defaults = {
-		// Width of the calendar
-		width:              '100%',
-		// Initial view (can be 'month', 'week', 'day')
-		view:               'month',
-		// Initial date. No matter month, week or day this will be a starting point. Can be 'now' or a date in format 'yyyy-mm-dd'
-		day:                'now',
-		// Day Start time and end time with time intervals. Time split 10, 15 or 30.
-		time_start:         '06:00',
-		time_end:           '22:00',
-		time_split:         '30',
-		// Source of events data. It can be one of the following:
-		// - URL to return JSON list of events in special format.
-		//   {success:1, result: [....]} or for error {success:0, error:'Something terrible happened'}
-		//   events: [...] as described in events property description
-		//   The start and end variables will be sent to this url
-		// - A function that received the start and end date, and that
-		//   returns an array of events (as described in events property description)
-		// - An array containing the events
-		events_source:      '',
-		// Path to templates should end with slash /. It can be as relative
-		// /component/bootstrap-calendar/tmpls/
-		// or absolute
-		// http://localhost/component/bootstrap-calendar/tmpls/
-		tmpl_path:          'tmpls/',
-		tmpl_cache:         true,
-		classes:            {
-			months: {
-				inmonth:  'cal-day-inmonth',
-				outmonth: 'cal-day-outmonth',
-				saturday: 'cal-day-weekend',
-				sunday:   'cal-day-weekend',
-				holidays: 'cal-day-holiday',
-				today:    'cal-day-today'
-			},
-			week:   {
-				workday:  'cal-day-workday',
-				saturday: 'cal-day-weekend',
-				sunday:   'cal-day-weekend',
-				holidays: 'cal-day-holiday',
-				today:    'cal-day-today'
-			}
-		},
-		// ID of the element of modal window. If set, events URLs will be opened in modal windows.
-		modal:              null,
-		//	modal handling setting, one of "iframe", "ajax" or "template"
-		modal_type:         "iframe",
-		//	function to set modal title, will be passed the event as a parameter
-		modal_title:        null,
-		views:              {
-			year:  {
-				slide_events: 1,
-				enable:       1
-			},
-			month: {
-				slide_events: 1,
-				enable:       1
-			},
-			week:  {
-				enable: 1
-			},
-			day:   {
-				enable: 1
-			}
-		},
-		merge_holidays:     false,
-		// ------------------------------------------------------------
-		// CALLBACKS. Events triggered by calendar class. You can use
-		// those to affect you UI
-		// ------------------------------------------------------------
-		onAfterEventsLoad:  function(events) {
-			// Inside this function 'this' is the calendar instance
-		},
-		onBeforeEventsLoad: function(next) {
-			// Inside this function 'this' is the calendar instance
-			next();
-		},
-		onAfterViewLoad:    function(view) {
-			// Inside this function 'this' is the calendar instance
-		},
-		onAfterModalShown:  function(events) {
-			// Inside this function 'this' is the calendar instance
-		},
-		onAfterModalHidden: function(events) {
-			// Inside this function 'this' is the calendar instance
-		},
-		// -------------------------------------------------------------
-		// INTERNAL USE ONLY. DO NOT ASSIGN IT WILL BE OVERRIDDEN ANYWAY
-		// -------------------------------------------------------------
-		events:             [],
-		templates:          {
-			year:  '',
-			month: '',
-			week:  '',
-			day:   ''
-		},
-		stop_cycling:       false
-	};
+  var defaults = {
+    // Width of the calendar
+    width:              '100%',
+    // Initial view (can be 'month', 'week', 'day')
+    view:               'month',
+    // Initial date. No matter month, week or day this will be a starting point. Can be 'now' or a date in format 'yyyy-mm-dd'
+    day:                'now',
+      // Day Start time and end time with time intervals. Time split 10, 15 or 30.
+    time_start:         '06:00',
+    time_end:           '22:00',
+    time_split:         '30',
+    // Source of events data. It can be one of the following:
+    // - URL to return JSON list of events in special format.
+    //   {success:1, result: [....]} or for error {success:0, error:'Something terrible happened'}
+    //   events: [...] as described in events property description
+    //   The start and end variables will be sent to this url
+    // - A function that received the start and end date, and that
+    //   returns an array of events (as described in events property description)
+    // - An array containing the events
+    events_source:      '',
+    // Path to templates should end with slash /. It can be as relative
+    // /component/bootstrap-calendar/tmpls/
+    // or absolute
+    // http://localhost/component/bootstrap-calendar/tmpls/
+    tmpl_path:          'tmpls/',
+    tmpl_cache:         true,
+    classes:            {
+      months: {
+	inmonth:  'cal-day-inmonth',
+	outmonth: 'cal-day-outmonth',
+	saturday: 'cal-day-weekend',
+	sunday:   'cal-day-weekend',
+	holidays: 'cal-day-holiday',
+	today:    'cal-day-today'
+      },
+      week:   {
+	workday:  'cal-day-workday',
+	saturday: 'cal-day-weekend',
+	sunday:   'cal-day-weekend',
+	holidays: 'cal-day-holiday',
+	today:    'cal-day-today'
+      }
+    },
+    // ID of the element of modal window. If set, events URLs will be opened in modal windows.
+    modal:              null,
+    //	modal handling setting, one of "iframe", "ajax" or "template"
+    modal_type:         "iframe",
+    //	function to set modal title, will be passed the event as a parameter
+    modal_title:        null,
+    views:              {
+      year:  {
+	slide_events: 1,
+	enable:       1
+      },
+      month: {
+	slide_events: 1,
+	enable:       1
+      },
+      week:  {
+	enable: 1
+      },
+      day:   {
+	enable: 1
+      }
+    },
+    merge_holidays:     false,
+    // ------------------------------------------------------------
+    // CALLBACKS. Events triggered by calendar class. You can use
+    // those to affect you UI
+    // ------------------------------------------------------------
+    onAfterEventsLoad:  function(events) {
+			                               // Inside this function 'this' is the calendar instance
+		                                     },
+    onBeforeEventsLoad: function(next) {
+			  // Inside this function 'this' is the calendar instance
+			  next();
+		        },
+    onAfterViewLoad:    function(view) {
+	// Inside this function 'this' is the calendar instance
+      },
+    onAfterModalShown:  function(events) {
+			             // Inside this function 'this' is the calendar instance
+		                   },
+    onAfterModalHidden: function(events) {
+      // Inside this function 'this' is the calendar instance
+		        },
+    // -------------------------------------------------------------
+      // INTERNAL USE ONLY. DO NOT ASSIGN IT WILL BE OVERRIDDEN ANYWAY
+    // -------------------------------------------------------------
+    events:             [],
+    templates:          {
+      year:  '',
+      month: '',
+      week:  '',
+      day:   ''
+    },
+    stop_cycling:       false
+  };
 
-	var defaults_extended = {
-		first_day: 2,
-		holidays:  {
+  var defaults_extended = {
+    first_day: 2,
+    holidays:  {
 			// January 1
 			'01-01':  "New Year's Day",
 			// Third (+3*) Monday (1) in January (01)
@@ -429,8 +429,11 @@ if(!String.prototype.formatNum) {
 		data.start = new Date(this.options.position.start.getTime());
 		data.lang = this.locale;
 
-		this.context.append(this.options.templates[this.options.view](data));
-		this._update();
+          var view = this.options.view
+          var template_func = this.options.templates[view] // will fail if the template dir is not there
+          var template_results = template_func(data)
+	  this.context.append(template_results);
+	  this._update();
 	};
 
 	Calendar.prototype._calculate_hour_minutes = function(data) {
@@ -1160,7 +1163,7 @@ if(!String.prototype.formatNum) {
 			});
 		});
 
-	
+
 
 		// Wait 400ms before updating the modal & attach the mouseenter&mouseleave(400ms is the time for the slider to fade out and slide up)
 		setTimeout(function() {

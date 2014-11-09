@@ -29,13 +29,25 @@ FILES = {
     "js/app.js": "js/app.js",
 }
 
+for t in [
+        'day',
+        'events-list',
+        'modal',
+        'month-day',
+        'month',
+        'week-days',
+        'week',
+        'year',
+        'year-month']:
+    f= "tmpl/%s.html"
+    FILES[f]=f
+
+print "FILES",FILES    
+
 def register(pelican):
     """
     now we register this plugin into pelica
     """
-
-
-
     #pelican.context['staticfiles'].append(sc)
 
 class StaticGenerator(object):
