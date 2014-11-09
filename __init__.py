@@ -39,7 +39,7 @@ for t in [
         'week',
         'year',
         'year-month']:
-    f= "tmpl/%s.html"
+    f= "tmpls/%s.html" % t
     FILES[f]=f
 
 print "FILES",FILES    
