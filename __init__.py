@@ -17,14 +17,16 @@ class Blah(object):
 
 
 FILES = {
+    "events.json" : "events.json", # this should go into the content... TODO
     "css/calendar.min.css" : "css/calendar.min.css",
-    'components/bootstrap3/css/bootstrap.min.css' : 'css/bootstrap.css',
+    "css/calendar.css" : "css/calendar.css",
+    'components/bootstrap3/css/bootstrap.min.css' : 'css/bootstrap.min.css',
+    'components/jstimezonedetect/jstz.min.js' : 'js/jstz.min.js',
     'index.html' : 'calendar.html',
     'components/bootstrap3/css/bootstrap-theme.min.css' : 'css/bootstrap-theme.min.css',
     "components/jquery/jquery.min.js" : "js/jquery.min.js" ,
     "components/underscore/underscore-min.js": "js/underscore-min.js",
     "components/bootstrap3/js/bootstrap.min.js" : "js/bootstrap.min.js",
-    "components/jstimezonedetect/jstz.min.js" : "jstz.min.js",
     "js/calendar.js": "js/calendar.js",
     "js/app.js": "js/app.js",
 }
