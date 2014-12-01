@@ -233,14 +233,15 @@ if(!String.prototype.formatNum) {
 	}
 
 	function buildEventsUrl(events_url, data) {
-		var separator, key, url;
-		url = events_url;
-		separator = (events_url.indexOf('?') < 0) ? '?' : '&';
-		for(key in data) {
-			url += separator + key + '=' + encodeURIComponent(data[key]);
-			separator = '&';
-		}
-		return url;
+	  //var separator, key, url;
+	  return events_url;
+          // for pelican we dont have any extra parameters
+	  // separator = (events_url.indexOf('?') < 0) ? '?' : '&';
+	  // for(key in data) {
+	  // 	url += separator + key + '=' + encodeURIComponent(data[key]);
+	  // 	separator = '&';
+	  // }
+	  // return url;
 	}
 
 	function getExtentedOption(cal, option_name) {
