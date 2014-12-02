@@ -25,6 +25,7 @@ FILES = {
     'index.html' : 'calendar.html',
     'components/bootstrap3/css/bootstrap-theme.min.css' : 'css/bootstrap-theme.min.css',
     "components/jquery/jquery.min.js" : "js/jquery.min.js" ,
+    "components/jquery/jquery-1.10.2.min.map" : "js/jquery-1.10.2.min.map" ,
     "components/underscore/underscore-min.js": "js/underscore-min.js",
     "components/bootstrap3/js/bootstrap.min.js" : "js/bootstrap.min.js",
     "js/calendar.js": "js/calendar.js",
