@@ -1,4 +1,4 @@
-{"result": [{"class": "event",
+[{"class": "event",
              "end": 1426950000000,
              "id": 2,
              "start": 1426946400000,
@@ -117,5 +117,4 @@
              "id": 21,
              "start": 1427058000000,
              "title": "Closing Ceremony/Round Table",
-             "url": "/events/Closing Ceremony/Round Table"}],
- "success": 1}
+             "url": "/events/Closing Ceremony/Round Table"}]
